@@ -23,13 +23,16 @@ router.get("/:id", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-  console.log(request.body);
+  console.log({requestBody: request.body});
+
   try {
-    // await knex("plants")
-    //   .insert({plant_name : "marusja", description : "desc"})
-    //   .then((selected) => {
-    //     response.status(201).json(selected[0]);
-    //   });
+    await knex("plants")
+    .insert(request.body)
+     //.insert({"plant_name" : "hjhjh", "description" : "jhhh"})
+      .then((selected) => {
+        response.status(201).json({requestBody: request.body})
+        //response.status(201).json(selected[0]);
+      });
   } catch (error) {
     throw error;
   }
@@ -46,15 +49,15 @@ router.post("/", async (request, response) => {
 //   }
 // });
 
-// router.delete("/:id", async (request, response) => {
-//   try {
-//     await knex("plants")
-//       .where({ id: parseInt(request.params.id) })
-//       .delete();
-//     response.status(202).json("Deleted");
-//   } catch (error) {
-//     throw error;
-//   }
-// });
+router.delete("/:id", async (request, response) => {
+  try {
+    await knex("plants")
+      .where({ id: parseInt(request.params.id) })
+      .delete();
+    response.status(202).json("Deleted");
+  } catch (error) {
+    throw error;
+  }
+});
 
 module.exports = router;

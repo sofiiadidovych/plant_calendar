@@ -4,8 +4,12 @@
   "description": "1. Start a back end part",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd src/client && npm install && npm run build",
+    "server": "node src/server/app.js",
+    "client": "cd ./src/client/ && npm run start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -26,9 +30,8 @@
     "@babel/preset-react": "^7.12.1",
     "@types/xml": "^1.0.3",
     "app-root-path": "^2.1.0",
-    "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "css-loader": "^5.0.0",

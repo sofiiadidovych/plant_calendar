@@ -1,9 +1,11 @@
 const express = require("express");
-const app = express();
+
 const router = express.Router();
 const path = require("path");
 
-const PORT = 3000;
+const app = express();
+
+const PORT = 3001;
 
 const plantsRouter = require("./api/plants");
 
@@ -21,6 +23,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(express.urlencoded({ extended: true }));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+app.use(express.text());
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
